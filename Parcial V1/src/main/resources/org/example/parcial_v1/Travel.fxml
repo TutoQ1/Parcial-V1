@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.parcial_v1.controllers.ControllerTravel">
+   <children>
+      <AnchorPane prefHeight="771.0" prefWidth="800.0">
+         <children>
+            <ListView fx:id="list" layoutX="33.0" layoutY="24.0" prefHeight="523.0" prefWidth="378.0" />
+            <Button layoutX="539.0" layoutY="483.0" mnemonicParsing="false" onAction="#handleComplete" text="Completar vuelo" />
+            <Button layoutX="556.0" layoutY="344.0" mnemonicParsing="false" onAction="#handleReg" text="Resgistrar" />
+            <Button layoutX="544.0" layoutY="532.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancelar vuelo" />
+            <TextField fx:id="date" layoutX="468.0" layoutY="232.0" prefHeight="25.0" prefWidth="245.0" promptText="Fecha: DD/MM/YYYY" />
+            <TextField fx:id="incHour" layoutX="468.0" layoutY="273.0" prefHeight="25.0" prefWidth="245.0" promptText="Hora de llegada: h/mm a" />
+            <TextField fx:id="exitHour" layoutX="468.0" layoutY="310.0" prefHeight="25.0" prefWidth="245.0" promptText="Hora de salida: h/mm a" />
+            <Button layoutX="545.0" layoutY="436.0" mnemonicParsing="false" onAction="#handleInit" text="Vuelo iniciado" />
+            <ComboBox fx:id="origen" layoutX="468.0" layoutY="112.0" prefHeight="25.0" prefWidth="245.0" promptText="Lugar de entrada" />
+            <ComboBox fx:id="destination" layoutX="468.0" layoutY="76.0" prefHeight="25.0" prefWidth="245.0" promptText="Lugar de salida" />
+            <ComboBox fx:id="flyTyp" layoutX="468.0" layoutY="38.0" prefHeight="25.0" prefWidth="245.0" promptText="Tipo de vuelo" />
+            <ComboBox fx:id="visa" layoutX="468.0" layoutY="150.0" prefHeight="25.0" prefWidth="245.0" promptText="Visado" />
+            <ComboBox fx:id="food" layoutX="468.0" layoutY="189.0" prefHeight="25.0" prefWidth="245.0" promptText="Comida" />
+            <Label fx:id="error" alignment="CENTER" layoutX="423.0" layoutY="381.0" prefHeight="43.0" prefWidth="357.0" text="Label" textFill="RED" />
+            <Button layoutX="417.0" layoutY="12.0" mnemonicParsing="false" onAction="#refresh" prefHeight="25.0" prefWidth="18.0" text="Vuelo iniciado" />
+         </children></AnchorPane>
+   </children>
+</VBox>

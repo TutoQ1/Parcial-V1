@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TabPane?>
+
+<?import javafx.scene.control.Tab?>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/26" fx:controller="org.example.parcial_v1.controllers.ControllerMain" >
+
+    <tabs>
+        <Tab text = " Pasajeros ">
+            <content>
+                <fx:include source=" Passenger.fxml "/>
+            </content>
+
+        </Tab>
+
+        <Tab text = " Reservaciones " >
+            <content>
+                <fx:include source="Reservation.fxml"/>
+            </content>
+        </Tab>
+
+        <Tab text = " Viajes ">
+            <content>
+                <fx:include source="Travel.fxml"/>
+            </content>
+        </Tab>
+
+    </tabs>
+
+
+</TabPane>
