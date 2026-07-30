@@ -61,8 +61,12 @@ public class ControllerReservation extends ControllerTravel implements Initializ
     }
 
     public void handleCancelR(){
-        srv.delete(selectedItem.getCode());
-        show();
+        try {
+            srv.delete(selectedItem.getCode());
+            show();
+        }catch (Exception e){
+            error(e);
+        }
     }
     public void refresh1(){
         show();

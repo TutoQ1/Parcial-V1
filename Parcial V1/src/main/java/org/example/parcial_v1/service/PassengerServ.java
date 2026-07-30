@@ -3,48 +3,50 @@ package org.example.parcial_v1.service;
 import org.example.parcial_v1.entity.Passenger;
 import org.example.parcial_v1.repository.DataBase;
 
+import java.security.spec.ECField;
+import java.util.EmptyStackException;
 import java.util.List;
+import java.util.Optional;
 
 public class PassengerServ {
 
     DataBase repo = new DataBase();
 
     public void creation(Passenger p) throws Exception{
-        if(p.getName() == null || p.getName().isBlank() || !p.getName().matches("[a-zA-Z]+( [a-zA-Z+]*)")){
-            throw new Exception("Nombre invalido".toUpperCase());
-        }
 
-        if(p.getId()<0){
-            throw new Exception("VALOR DE ID INVALIDO");
-        }
+        Optional.ofNullable(p.getName()).
+                filter(name -> !name.isBlank() && name.matches("[a-zA-Z]+( [a-zA-Z]*)"))
+                .orElseThrow(()->new Exception("NOMBRE INVALIDO"));
 
-        if(p.getAge() < 0 || p.getAge() > 130){
-            throw new Exception("VALOR DE EDAD INVALIDO");
-        }
+        Optional.of(p.getAge())
+                .filter(age -> age >= 0 && age <=130)
+                .orElseThrow(()-> new Exception("EDAD INVALIDA"));
 
-        if(p.getPhone() == null || p.getPhone().isBlank()){
-            throw new Exception("NUMERO DE TELFONO INVALIDO");
-        }
+        Optional.of(p.getId())
+                .filter(id -> id>=0)
+                .orElseThrow(()-> new Exception("ID INVALIDO"));
 
-        if(p.getPassportCode() == null || p.getPassportCode().isBlank()){
-            throw new Exception("VALOR DE PASAPORTE INCORRECTO");
-        }
+        Optional.ofNullable(p.getPhone())
+                .filter(phone -> !phone.isBlank() && phone.matches("[0-9]"))
+                .orElseThrow(()-> new Exception("NUMERO DE TELEFONO INCORRECTO"));
 
-        if(p.getNationality() == null || !p.getNationality().matches("[a-zA-Z]+")){
-            throw new Exception("VALOR DE NACIONALIDAD INCORRECTO");
-        }
+        Optional.ofNullable(p.getPassportCode())
+                .filter(pass -> !pass.isBlank())
+                .orElseThrow(()->new Exception("PASAPORTE INVALIDO"));
 
-        if(!p.getGmail().contains("@")){
-            throw new Exception("DEDBE INCLUIR @ EN EL CORREO");
-        }else
-            if(p.getGmail() == null || p.getGmail().isBlank()){
-                throw new Exception("VALOR DE CORREO INVALIDO");
-            }
+        Optional.ofNullable(p.getNationality())
+                .filter(nat -> !nat.isBlank() && nat.matches("[a-zA-Z]"))
+                .orElseThrow(() -> new Exception("NACIONALIDAD INVALIDA"));
+
+        Optional.ofNullable(p.getGmail())
+                        .filter(gmail -> gmail.contains("@") && !gmail.isBlank())
+                                .orElseThrow(()->new Exception("GMAIL INVVALIDO"));
+
         repo.createPassenger(p);
     }
 
     public List<Passenger> show(){
-        return repo.returnPassenger();
+        return DataBase.returnPassenger();
     }
 
     public void delete(long code){

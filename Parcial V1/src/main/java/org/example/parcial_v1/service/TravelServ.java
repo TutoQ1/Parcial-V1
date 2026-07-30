@@ -19,6 +19,7 @@ public class TravelServ {
 
         t.setState(Data.PROGRAMADO);
         t.setSitsAvb(t.getCapacity());
+
         if(t.getFlyTyp() == null){
             throw new Exception("SELECCIONE TIPO DE VUELO");
         }

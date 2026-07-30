@@ -35,7 +35,7 @@ public class DataBase {
         return reservations;
     }
 
-    public static    List<Travel> returnTravel(){
+    public static  List<Travel> returnTravel(){
         return travels;
     }
 

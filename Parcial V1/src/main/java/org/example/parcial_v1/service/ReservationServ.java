@@ -6,6 +6,7 @@ import org.example.parcial_v1.repository.DataBase;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 
 public class ReservationServ {
@@ -16,12 +17,13 @@ public class ReservationServ {
     public void creation(Reservation r) throws Exception{
 
         if(DataBase.returnTravel().stream()
+                .filter(event -> event.getCode() == r.getIdFly())
                 .noneMatch(t -> t.getState().equals(Data.PROGRAMADO)))
         {throw new Exception("VUELO NO DISPONIBLE");}
 
-        if(r.getSitsAskd() < 0 || r.getSitsAskd() > 5){
-            throw new Exception("VALOR DE SILLAS INVALIDO");
-        }
+        Optional.of(r.getSitsAskd())
+                .filter(sits -> sits >= 0 && sits <= 5 )
+                .orElseThrow(() -> new  Exception("NUMERO DE SILLAS INVALIDO"));
 
         if(r.getId()<0 || DataBase.returnPassenger().stream()
                 .noneMatch(p -> p.getId() == r.getId())){
@@ -57,8 +59,8 @@ public class ReservationServ {
         return DataBase.returnReservation();
     }
 
-    public void delete(int code){
-        Reservation r = returnCode(code);
+    public void delete(int code) throws Exception{
+        Reservation r = returnCode(code).orElseThrow(() -> new Exception("NO EXISTE CODIGO"));
         r.setState(Data.CANCELADO);
         returnSits(r);
         repo.deleteReservation(code);
@@ -74,11 +76,11 @@ public class ReservationServ {
         r.setPrice(price * r.getSitsAskd());
     }
 
-    private Reservation returnCode(int code){
+    private Optional<Reservation> returnCode(int code){
         return DataBase.returnReservation().stream()
                 .filter(event -> event.getCode() == code)
-                .findFirst()
-                .orElse(null);
+                .findFirst();
+
     }
 
     public void deletePeers(int code){

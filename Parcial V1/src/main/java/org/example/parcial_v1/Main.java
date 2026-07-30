@@ -1,5 +1,6 @@
 package org.example.parcial_v1;
 
+import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,8 +22,11 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        Gson gson = new Gson();
 
         launch();
+
+        String json = gson.toJson("d");
 
     }
 }

@@ -1,6 +1,7 @@
 module org.example.parcial_v1 {
     requires javafx.controls;
     requires javafx.fxml;
+    requires com.google.gson;
 
 
     opens org.example.parcial_v1 to javafx.fxml;
